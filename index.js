@@ -28,7 +28,8 @@ function start() {
     });
     console.log("Verovio options:", tk.getOptions());
     console.log("Verovio default options:", tk.getDefaultOptions());
-    fetch("https://www.verovio.org/examples/downloads/Schubert_Lindenbaum.mei")
+    //fetch("https://www.verovio.org/examples/downloads/Schubert_Lindenbaum.mei")
+    fetch("Schubert_Lindenbaum.mei")
     .then( (response) => response.text() )
     .then( (meiXML) => {
         // ... then we can load the data into Verovio ...
@@ -61,7 +62,7 @@ function start() {
         }
     }
 
-    MIDIjs.player_callback = midiHightlightingHandler;
+    //MIDIjs.player_callback = midiHightlightingHandler;
     
     function saveMIDIHandler() {
         let base64midi = tk.renderToMIDI();
@@ -70,11 +71,11 @@ function start() {
     function playMIDIHandler() {
         let base64midi = tk.renderToMIDI();
         let midiString = 'data:audio/midi;base64,' + base64midi;
-        MIDIjs.play(midiString);
+        //MIDIjs.play(midiString);
     }
 
     function stopMIDIHandler() {
-        MIDIjs.stop();
+        //MIDIjs.stop();
     }
 
     document.getElementById("saveMIDI").addEventListener("click", saveMIDIHandler);
