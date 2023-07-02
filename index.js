@@ -11,7 +11,44 @@ function download(filename, text) {
     document.body.removeChild(element);
   }
 
+
+
 function start() {
+    function setup() {
+        // Render the SVG
+        document.getElementById("notation").innerHTML = tk.renderToSVG(1);
+        
+        // Get the MEI
+        const meiContent = tk.getMEI();
+        const parser = new DOMParser();
+        mei = parser.parseFromString(meiContent, "text/xml");
+        console.log(mei);
+    }
+
+    function readFile() {    
+        for (const file of input.files) {
+            const reader = new FileReader();
+            const name = file.name.toLowerCase();
+            if (name.endsWith(".musicxml") || name.endsWith(".xml") ||
+                name.endsWith(".mei") || name.endsWith(".krn")) {
+                reader.addEventListener("load", (e) => {
+                    tk.loadData(e.target.result);
+                    setup();
+                });
+                reader.readAsText(file);
+            } else if (name.endsWith(".mxl")) {
+                reader.addEventListener("load", (e) => {
+                    tk.loadZipDataBuffer(e.target.result);
+                    setup();
+                });
+                reader.readAsArrayBuffer(file);
+            }
+        }
+    }
+
+    const input = document.getElementById("input");
+    input.addEventListener("change", readFile);
+
     const tk = new verovio.toolkit();
     console.log("Verovio has loaded!");
 
