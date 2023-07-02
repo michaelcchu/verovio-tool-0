@@ -57,12 +57,12 @@ function start() {
     const pageWidth = document.body.clientWidth * 100 / zoom;
     tk.setOptions({
         scale: zoom,
-        landscape: true,
-        scaleToPageSize: true,
-        pageHeight: pageHeight,
+        svgAdditionalAttribute: ["note@pname", "note@oct"],
         pageWidth: pageWidth,
-        svgAdditionalAttribute: ["note@pname", "note@oct"]
+        //breaks: "none",
+        mnumInterval: 1
     });
+
     console.log("Verovio options:", tk.getOptions());
     console.log("Verovio default options:", tk.getDefaultOptions());
     //fetch("https://www.verovio.org/examples/downloads/Schubert_Lindenbaum.mei")
