@@ -99,7 +99,7 @@ function start() {
         }
     }
 
-    //MIDIjs.player_callback = midiHightlightingHandler;
+    MIDIjs.player_callback = midiHightlightingHandler;
     
     function saveMIDIHandler() {
         let base64midi = tk.renderToMIDI();
@@ -108,11 +108,11 @@ function start() {
     function playMIDIHandler() {
         let base64midi = tk.renderToMIDI();
         let midiString = 'data:audio/midi;base64,' + base64midi;
-        //MIDIjs.play(midiString);
+        MIDIjs.play(midiString);
     }
 
     function stopMIDIHandler() {
-        //MIDIjs.stop();
+        MIDIjs.stop();
     }
 
     document.getElementById("saveMIDI").addEventListener("click", saveMIDIHandler);
@@ -120,6 +120,8 @@ function start() {
     document.getElementById("stopMIDI").addEventListener("click", stopMIDIHandler);
 }
 
-document.addEventListener("DOMContentLoaded", () => {
-    verovio.module.onRuntimeInitialized = start;
-})
+const body = document.getElementsByTagName('body')[0];
+const script = document.createElement('script');
+script.src ="./verovio-toolkit-hum.js";
+script.onload = () => {verovio.module.onRuntimeInitialized = start;}
+body.appendChild(script);
