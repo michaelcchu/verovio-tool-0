@@ -58,8 +58,7 @@ function start() {
     tk.setOptions({
         scale: zoom,
         svgAdditionalAttribute: ["note@pname", "note@oct"],
-        pageWidth: pageWidth,
-        //breaks: "none",
+        breaks: "none",
         mnumInterval: 1
     });
 
